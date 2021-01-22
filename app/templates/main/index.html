@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<!--<link rel="stylesheet" type="text/css" href="animalfood\main.css">-->
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="title is-3">Enter your pet's details here, then click 'submit' to get results</h3>
+    <form>
+        <div class="container">
+            <div class="field">
+                <div class="control">
+                    <label class="label">My pet is a:</label>
+                    <div class="select is-primary">
+                        <select name="animal" required>
+                            {% for animal in animals %}
+                                <option value="{{ animal.id }}">{{ animal.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columns">
+                <div class="column">
+                    <div class="field">
+                        <label class="label">Age</label>
+                        <div class="control">
+                            <input class="input" type="number" name="age" placeholder="Age" value="{{ dog_age }}" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <label class="label">Weight</label>
+                        <div class="control">
+                            <input class="input" type="number" name="weight" placeholder="Weight"
+                                   value="{{ dog_weight }}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--                <div class="field">-->
+            <!--                    <div class="control">-->
+            <!--                        <label class="checkbox">-->
+            <!--                            <input type="checkbox">-->
+            <!--                            I agree to the <a href="#">terms and conditions</a>-->
+            <!--                        </label>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <!--                <div class="field">-->
+            <!--                    <div class="control">-->
+            <!--                        <label class="radio">-->
+            <!--                            <input type="radio" name="question">-->
+            <!--                            Yes-->
+            <!--                        </label>-->
+            <!--                        <label class="radio">-->
+            <!--                            <input type="radio" name="question">-->
+            <!--                            No-->
+            <!--                        </label>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <input type="submit" class="button is-link" value="Submit">
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Clear</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <section class="section">
+        <div class="container">
+            <strong>Your pet should eat:</strong>
+            {% for feed in feeds %}
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-64x64">
+                            <img src="{{ feed.image_url }}">
+                        </p>
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>{{ feed.name }}</strong>
+                                <br>
+                                <strong>For ages:</strong> {{ feed.min_age }} - {{ feed.max_age }}
+                                <br>
+                                <strong>For weights:</strong> {{ feed.min_weight }} - {{ feed.max_weight }} kg
+                                <br>
+                                <strong>Description:</strong> {{ feed.description }}
+                                <br>
+                                <strong>Price range:</strong> {{ feed.price_range }}
+                                <br>
+                                <strong>Purchase link: <a href={{ feed.purchase_link }} target="_blank">Shop Amazon</a></strong>
+                            </p>
+                        </div>
+                        <nav class="level is-mobile">
+                            <div class="level-left">
+                                <a class="level-item">
+                                    <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                                </a>
+                                <a class="level-item">
+                                    <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                                </a>
+                                <a class="level-item">
+                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="media-right">
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+</html>
